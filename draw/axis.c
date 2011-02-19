@@ -70,11 +70,11 @@ axis_draw_part (display_t *disp, int x, int y, int width, int height, Uint32 col
   if (line_y >= y && line_y < (y + height))
     line (disp, x, line_y, x + width - 1, line_y, color);
     
-  for (i = line_x % disp->grid_step; i < width; i += disp->grid_step)
-    line (disp, i, y, i, y + height - 1, (0xffffff & color) | ARGB (0x5f, 0, 0, 0));
+  for (i = (line_x - x) % disp->grid_step; i < width; i += disp->grid_step)
+    line (disp, x + i, y, x + i, y + height - 1, (0xffffff & color) | ARGB (0x5f, 0, 0, 0));
     
-  for (i = line_y % disp->grid_step; i < height; i += disp->grid_step)
-    line (disp, x, i, x + width - 1, i, (0xffffff & color) | ARGB (0x5f, 0, 0, 0));  
+  for (i = (line_y - y) % disp->grid_step; i < height; i += disp->grid_step)
+    line (disp, x, y + i, x + width - 1, y + i, (0xffffff & color) | ARGB (0x5f, 0, 0, 0));  
     
   line (disp, x, y, x + width - 1, y, color);
   line (disp, x, y, x, y + height - 1, color);
