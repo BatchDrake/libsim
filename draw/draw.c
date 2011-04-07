@@ -402,7 +402,7 @@ display_end (display_t *display)
   display_refresh (display);
   
   for (;;) 
-    display_poll_events (display);
+    display_wait_events (display);
 }
 
 
